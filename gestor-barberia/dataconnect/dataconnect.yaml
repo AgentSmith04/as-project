@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: "gestor-barberia"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "gestor-barberia-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
