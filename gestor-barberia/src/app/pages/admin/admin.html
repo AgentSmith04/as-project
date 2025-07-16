@@ -1,0 +1,27 @@
+<div class="admin-panel">
+  <h2>Panel de Administrador</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button (click)="editUser(user.id)" class="btn blue">Editar</button>
+          <button (click)="deleteUser(user.id)" class="btn red">Eliminar</button>
+          <button (click)="blockUser(user.id)" class="btn gray">Bloquear</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

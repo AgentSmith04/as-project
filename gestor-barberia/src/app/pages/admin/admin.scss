@@ -1,0 +1,58 @@
+.admin-panel {
+  max-width: 900px;
+  margin: 60px auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+  }
+
+  .btn {
+    margin-right: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: white;
+
+    &.blue {
+      background-color: #007bff;
+    }
+
+    &.red {
+      background-color: #dc3545;
+    }
+
+    &.gray {
+      background-color: #6c757d;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
