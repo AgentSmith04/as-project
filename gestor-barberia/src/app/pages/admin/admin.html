@@ -11,15 +11,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of users$ | async">
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>
-          <button (click)="editUser(user.id)" class="btn blue">Editar</button>
-          <button (click)="deleteUser(user.id)" class="btn red">Eliminar</button>
-          <button (click)="blockUser(user.id)" class="btn gray">Bloquear</button>
+          <button (click)="editUser(user.id)">Editar</button>
+          <button (click)="deleteUser(user.id)">Eliminar</button>
+          <button (click)="blockUser(user.id)">Bloquear</button>
         </td>
       </tr>
     </tbody>

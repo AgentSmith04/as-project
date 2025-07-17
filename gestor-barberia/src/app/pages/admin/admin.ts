@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -9,21 +11,23 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./admin.scss']
 })
 export class AdminComponent {
-  users = [
-    { id: 1, name: 'Kevin Nivesela', email: 'kevin@mail.com', role: 'Administrador' },
-    { id: 2, name: 'Ana Torres', email: 'ana@mail.com', role: 'Barbero' },
-    { id: 3, name: 'Luis Mena', email: 'luis@mail.com', role: 'Cliente' }
-  ];
+  users$: Observable<any[]>;
+  private firestore = inject(Firestore);
 
-  deleteUser(id: number) {
-    alert(`Eliminar usuario con ID ${id} (simulado)`);
+  constructor() {
+    const usersCollection = collection(this.firestore, 'users');
+    this.users$ = collectionData(usersCollection, { idField: 'id' });
   }
 
-  blockUser(id: number) {
-    alert(`Bloquear usuario con ID ${id} (simulado)`);
+  editUser(id: string) {
+    alert('Editar usuario con id ' + id);
   }
 
-  editUser(id: number) {
-    alert(`Editar usuario con ID ${id} (simulado)`);
+  deleteUser(id: string) {
+    alert('Eliminar usuario con id ' + id);
+  }
+
+  blockUser(id: string) {
+    alert('Bloquear usuario con id ' + id);
   }
 }

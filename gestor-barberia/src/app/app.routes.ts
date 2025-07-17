@@ -1,12 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home';
-import { LoginComponent } from './pages/login/login';
-import { RegisterComponent } from './pages/register/register';
-import { AdminComponent } from './pages/admin/admin';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  {path: 'admin', component: AdminComponent}
+  { path: '', loadComponent: () => import('./pages/home/home').then(m => m.HomeComponent) },
+  { path: 'login', loadComponent: () => import('./pages/login/login').then(m => m.LoginComponent) },
+  { path: 'register', loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent) },
+  { path: 'admin', loadComponent: () => import('./pages/admin/admin').then(m => m.AdminComponent) }
 ];

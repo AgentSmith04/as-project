@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "TU_API_KEY_PROD",
-    authDomain: "TU_AUTH_DOMAIN_PROD",
-    projectId: "TU_PROJECT_ID_PROD",
-    storageBucket: "TU_STORAGE_BUCKET_PROD",
-    messagingSenderId: "TU_MESSAGING_SENDER_ID_PROD",
-    appId: "TU_APP_ID_PROD"
+    apiKey: "AIzaSyCsbXyL28hfho-baI88eW83CAY0bHGiBhg",
+    authDomain: "gestor-barberia2.firebaseapp.com",
+    projectId: "gestor-barberia2",
+    storageBucket: "gestor-barberia2.firebasestorage.app",
+    messagingSenderId: "426427919794",
+    appId: "1:426427919794:web:d22a068b6a4d174633c8ab"
     // measurementId: "TU_MEASUREMENT_ID_PROD"
   }
 };
