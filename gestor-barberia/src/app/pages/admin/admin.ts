@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Firestore, collection, collectionData, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-
+import { Firestore, collection, collectionData, updateDoc, doc, deleteDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -12,11 +11,11 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './admin.html',
   styleUrls: ['./admin.scss']
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
   users$: Observable<any[]>;
   private firestore = inject(Firestore);
 
-  // Variables para formulario de edición
+  // Para editar usuarios
   editMode = false;
   currentUser: any = {};
 
@@ -25,15 +24,15 @@ export class AdminComponent {
     this.users$ = collectionData(usersCollection, { idField: 'id' });
   }
 
-  async addUser() {
-    const usersCollection = collection(this.firestore, 'users');
-    await addDoc(usersCollection, {
-      name: 'Usuario Nuevo',
-      email: 'nuevo@email.com',
-      role: 'Cliente'
-    });
+  // Protege el componente: solo admin accede
+  ngOnInit() {
+    const role = localStorage.getItem('userRole');
+    if (role !== 'admin') {
+      window.location.href = '/'; // Redirige si no es admin
+    }
   }
 
+  // CRUD Básico:
   editUser(user: any) {
     this.editMode = true;
     this.currentUser = { ...user };
@@ -58,5 +57,19 @@ export class AdminComponent {
   async deleteUser(id: string) {
     const userDoc = doc(this.firestore, 'users', id);
     await deleteDoc(userDoc);
+  }
+
+  // Handler del select para cambio de rol
+  onRoleChange(userId: string, event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    if (selectElement && selectElement.value) {
+      this.cambiarRol(userId, selectElement.value);
+    }
+  }
+
+  // Cambiar rol en la base
+  async cambiarRol(userId: string, nuevoRol: string) {
+    const userDoc = doc(this.firestore, 'users', userId);
+    await updateDoc(userDoc, { role: nuevoRol });
   }
 }

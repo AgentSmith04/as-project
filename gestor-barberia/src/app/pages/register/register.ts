@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-register',
@@ -10,23 +13,32 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./register.scss']
 })
 export class RegisterComponent {
-  name = '';
   email = '';
   password = '';
-  confirmPassword = '';
-  submitted = false;
+  name = '';
+  errorMsg = '';
+  private auth = inject(Auth);
+  private firestore = inject(Firestore);
+  private router = inject(Router);
 
-  onSubmit() {
-    this.submitted = true;
+  async register() {
+    try {
+      // 1. Crear usuario en Auth
+      const userCred = await createUserWithEmailAndPassword(this.auth, this.email, this.password);
 
-    if (
-      this.name.trim() &&
-      this.email.trim() &&
-      this.password &&
-      this.confirmPassword &&
-      this.password === this.confirmPassword
-    ) {
-      alert('Registro exitoso (simulado)');
+      // 2. Guardar datos adicionales en Firestore
+      await setDoc(doc(this.firestore, 'users', userCred.user.uid), {
+        name: this.name,
+        email: this.email,
+        role: 'cliente', // Siempre inicia como cliente
+        createdAt: new Date()
+      });
+
+      // 3. Redirigir o mostrar mensaje
+      this.router.navigate(['/login']);
+    } catch (err: any) {
+      this.errorMsg = err.message || 'Error al registrar usuario';
     }
   }
 }
+

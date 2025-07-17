@@ -1,18 +1,10 @@
-<div class="register-container">
-  <h2>Registrarse</h2>
-  <form (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
-    <input type="text" [(ngModel)]="name" name="name" class="input" placeholder="Nombre completo" required />
-    <div class="error" *ngIf="submitted && !name">El nombre es obligatorio</div>
-
-    <input type="email" [(ngModel)]="email" name="email" class="input" placeholder="Correo electrónico" required />
-    <div class="error" *ngIf="submitted && !email">El correo es obligatorio</div>
-
-    <input type="password" [(ngModel)]="password" name="password" class="input" placeholder="Contraseña" required />
-    <div class="error" *ngIf="submitted && !password">La contraseña es obligatoria</div>
-
-    <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="input" placeholder="Confirmar contraseña" required />
-    <div class="error" *ngIf="submitted && password !== confirmPassword">Las contraseñas no coinciden</div>
-
-    <button type="submit" class="btn">Registrarse</button>
+<div class="register-form">
+  <h2>Registro</h2>
+  <form (ngSubmit)="register()">
+    <input type="text" [(ngModel)]="name" name="name" placeholder="Nombre" required />
+    <input type="email" [(ngModel)]="email" name="email" placeholder="Correo electrónico" required />
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
+    <button type="submit">Registrarse</button>
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
   </form>
 </div>

@@ -1,26 +1,7 @@
-<div class="login-container">
-  <h2>Iniciar Sesión</h2>
-  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
-    <input
-      type="email"
-      name="email"
-      [(ngModel)]="email"
-      class="input"
-      placeholder="Correo electrónico"
-      required
-    />
-    <div class="error" *ngIf="submitted && !email">El correo es obligatorio</div>
-
-    <input
-      type="password"
-      name="password"
-      [(ngModel)]="password"
-      class="input"
-      placeholder="Contraseña"
-      required
-    />
-    <div class="error" *ngIf="submitted && !password">La contraseña es obligatoria</div>
-
-    <button type="submit" class="btn">Entrar</button>
-  </form>
-</div>
+<h2>Iniciar Sesión</h2>
+<form (ngSubmit)="login()">
+  <input [(ngModel)]="email" name="email" placeholder="Correo electrónico" required />
+  <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required />
+  <button type="submit">Entrar</button>
+</form>
+<div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>

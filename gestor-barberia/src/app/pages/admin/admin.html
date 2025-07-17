@@ -1,7 +1,5 @@
 <div class="admin-panel">
   <h2>Panel de Administrador</h2>
-  <button (click)="addUser()">Agregar usuario</button>
-
   <table>
     <thead>
       <tr>
@@ -24,8 +22,15 @@
           <input *ngIf="editMode && currentUser.id === user.id" [(ngModel)]="currentUser.email" />
         </td>
         <td>
-          <span *ngIf="!editMode || currentUser.id !== user.id">{{ user.role }}</span>
-          <input *ngIf="editMode && currentUser.id === user.id" [(ngModel)]="currentUser.role" />
+          <!-- Selector de rol, editable solo si NO está editando este usuario -->
+          <select [value]="user.role"
+          (change)="onRoleChange(user.id, $event)"
+          [disabled]="editMode && currentUser.id === user.id"
+          >
+            <option value="cliente">Cliente</option>
+            <option value="barbero">Barbero</option>
+            <option value="admin">Admin</option>
+          </select>
         </td>
         <td>
           <ng-container *ngIf="!editMode || currentUser.id !== user.id">
