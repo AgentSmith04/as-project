@@ -5,6 +5,10 @@
   <a *ngIf="userRole === 'admin'" routerLink="/admin" class="nav-item">Admin</a>
   <a *ngIf="userRole === 'barbero'" routerLink="/barbero" class="nav-item">Barbero</a>
   <a *ngIf="userRole" (click)="logout()" class="nav-item" style="cursor:pointer;">Cerrar sesión</a>
+  <!-- Mostrar siempre que haya usuario logeado -->
+  <a routerLink="/cambiar-password" class="nav-item" *ngIf="userUid">Cambiar contraseña</a>
+  <a (click)="logout()" class="nav-item" *ngIf="userUid" style="cursor:pointer;">Cerrar sesión</a>
+
 </nav>
 
 <router-outlet></router-outlet>
