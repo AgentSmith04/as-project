@@ -1,0 +1,51 @@
+.agendar-panel {
+  max-width: 520px;
+  margin: 48px auto 0 auto;
+  background: #fff;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 6px 40px 0 rgba(36, 41, 46, 0.13);
+  text-align: center;
+}
+
+.agendar-panel h2 {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.agendar-panel h3 {
+  margin-top: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.agendar-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.agendar-panel li {
+  margin-bottom: 0.8rem;
+}
+
+.agendar-panel label {
+  display: inline-block;
+  margin: 0 12px 1.2rem 12px;
+  font-size: 1.05rem;
+}
+
+.agendar-panel button {
+  margin: 8px 7px 0 7px;
+  padding: 5px 18px;
+  border-radius: 8px;
+  border: 1px solid #2979ff;
+  background: #fff;
+  color: #2979ff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s background, 0.2s color;
+}
+.agendar-panel button:hover {
+  background: #2979ff;
+  color: #fff;
+}

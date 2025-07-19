@@ -1,0 +1,35 @@
+<div class="agendar-panel">
+  <h2>Reservar un turno</h2>
+
+  <!-- Mensaje de éxito (SIEMPRE visible cuando existe) -->
+  <div *ngIf="successMsg" class="msg-success">{{successMsg}}</div>
+  <!-- Mensaje de error (SIEMPRE visible cuando existe) -->
+  <div *ngIf="errorMsg" class="msg-error">{{errorMsg}}</div>
+
+  <!-- Lista de servicios -->
+  <div *ngIf="!selectedService">
+    <h3>Servicios disponibles</h3>
+    <ul>
+      <li *ngFor="let service of services$ | async">
+        <b>{{service.name}}</b> | {{service.duration}} min | ${{service.price}}
+        <button (click)="selectService(service)">Seleccionar</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Formulario para reservar -->
+  <div *ngIf="selectedService">
+    <h3>Servicio: {{selectedService.name}}</h3>
+    <label>Fecha:
+      <input type="date" [(ngModel)]="selectedDate">
+    </label>
+    <label>Hora:
+      <select [(ngModel)]="selectedTime">
+        <option value="" disabled selected>Selecciona una hora</option>
+        <option *ngFor="let hora of horarios" [value]="hora">{{hora}}</option>
+      </select>
+    </label>
+    <button (click)="agendarTurno()">Reservar</button>
+    <button (click)="cancelar()" type="button">Cancelar</button>
+  </div>
+</div>

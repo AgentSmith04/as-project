@@ -1,0 +1,48 @@
+<div class="admin-panel">
+  <h2>Gestión de Barberos</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Edición de barbero -->
+      <tr *ngIf="editMode">
+        <td>{{ currentBarber.id }}</td>
+        <td>
+          <input [(ngModel)]="currentBarber.name" />
+        </td>
+        <td>
+          <input [(ngModel)]="currentBarber.email" />
+        </td>
+        <td>
+          <button class="btn blue" (click)="saveBarber()">Guardar</button>
+          <button class="btn gray" (click)="cancelEdit()">Cancelar</button>
+        </td>
+      </tr>
+      <!-- Listado de barberos -->
+      <tr *ngFor="let barber of barbers$ | async">
+        <td>{{ barber.id }}</td>
+        <td>{{ barber.name }}</td>
+        <td>{{ barber.email }}</td>
+        <td>
+          <button class="btn blue" (click)="editBarber(barber)">Editar</button>
+          <button class="btn red" (click)="deleteBarber(barber.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Agregar nuevo barbero -->
+  <div class="add-barber-form">
+    <h3>Agregar Barbero</h3>
+    <input [(ngModel)]="currentBarber.name" placeholder="Nombre" />
+    <input [(ngModel)]="currentBarber.email" placeholder="Correo" />
+    <button class="btn blue" (click)="addBarber()">Agregar</button>
+  </div>
+</div>

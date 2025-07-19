@@ -13,23 +13,42 @@ import { Observable } from 'rxjs';
 })
 export class AdminComponent implements OnInit {
   users$: Observable<any[]>;
+  allUsers: any[] = [];
+  filteredUsers: any[] = [];
   private firestore = inject(Firestore);
 
-  // Para editar usuarios
   editMode = false;
   currentUser: any = {};
+  filterRole: string = '';
 
   constructor() {
     const usersCollection = collection(this.firestore, 'users');
     this.users$ = collectionData(usersCollection, { idField: 'id' });
+
+    // Suscríbete para tener la lista local y poder filtrar
+    this.users$.subscribe(users => {
+      this.allUsers = users;
+      this.applyRoleFilter();
+    });
   }
 
-  // Protege el componente: solo admin accede
   ngOnInit() {
     const role = localStorage.getItem('userRole');
     if (role !== 'admin') {
-      window.location.href = '/'; // Redirige si no es admin
+      window.location.href = '/';
     }
+  }
+
+  applyRoleFilter() {
+    if (this.filterRole) {
+      this.filteredUsers = this.allUsers.filter(user => user.role === this.filterRole);
+    } else {
+      this.filteredUsers = this.allUsers;
+    }
+  }
+
+  onFilterRoleChange() {
+    this.applyRoleFilter();
   }
 
   // CRUD Básico:
@@ -59,7 +78,6 @@ export class AdminComponent implements OnInit {
     await deleteDoc(userDoc);
   }
 
-  // Handler del select para cambio de rol
   onRoleChange(userId: string, event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     if (selectElement && selectElement.value) {
@@ -67,7 +85,6 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  // Cambiar rol en la base
   async cambiarRol(userId: string, nuevoRol: string) {
     const userDoc = doc(this.firestore, 'users', userId);
     await updateDoc(userDoc, { role: nuevoRol });

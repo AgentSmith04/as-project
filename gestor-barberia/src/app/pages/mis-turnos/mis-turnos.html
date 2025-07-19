@@ -1,0 +1,31 @@
+<div class="admin-panel">
+  <h2>Mis Turnos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Servicio</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Barbero</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turno of myAppointments$ | async">
+        <td>{{ turno.serviceName }}</td>
+        <td>{{ turno.date }}</td>
+        <td>{{ turno.time }}</td>
+        <td>
+          <!-- Si ya tiene barbero asignado, muestra el nombre -->
+          <span *ngIf="turno.barberName">{{ turno.barberName }}</span>
+          <span *ngIf="!turno.barberName">Sin asignar</span>
+        </td>
+        <td>
+          <span *ngIf="turno.status === 'pending'">Pendiente</span>
+          <span *ngIf="turno.status === 'confirmed'">Aceptado</span>
+          <span *ngIf="turno.status === 'cancelled'">Cancelado</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

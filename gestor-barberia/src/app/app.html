@@ -3,12 +3,13 @@
   <a *ngIf="!userRole" routerLink="/login" class="nav-item">Login</a>
   <a *ngIf="!userRole" routerLink="/register" class="nav-item">Registrarse</a>
   <a *ngIf="userRole === 'admin'" routerLink="/admin" class="nav-item">Admin</a>
+  <a *ngIf="userRole === 'admin'" routerLink="/admin-services" class="nav-item">Servicios</a>
+  <a *ngIf="userRole === 'admin'" routerLink="/admin-appointments" class="nav-item">Ver Turnos</a> <!-- <--- NUEVO ENLACE -->
   <a *ngIf="userRole === 'barbero'" routerLink="/barbero" class="nav-item">Barbero</a>
-  <a *ngIf="userRole" (click)="logout()" class="nav-item" style="cursor:pointer;">Cerrar sesión</a>
-  <!-- Mostrar siempre que haya usuario logeado -->
   <a routerLink="/cambiar-password" class="nav-item" *ngIf="userUid">Cambiar contraseña</a>
+  <a *ngIf="userRole === 'cliente'" routerLink="/agendar" class="nav-item">Agendar Turno</a>
+  <a *ngIf="userRole === 'cliente'" routerLink="/mis-turnos" class="nav-item">Mis Turnos</a>
   <a (click)="logout()" class="nav-item" *ngIf="userUid" style="cursor:pointer;">Cerrar sesión</a>
-
 </nav>
 
 <router-outlet></router-outlet>

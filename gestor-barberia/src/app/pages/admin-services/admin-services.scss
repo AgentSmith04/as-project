@@ -1,0 +1,14 @@
+.services-panel {
+  max-width: 650px;
+  margin: 32px auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px #ddd;
+  h2 { margin-top: 0; }
+  form { display: flex; gap: 8px; margin-bottom: 16px; }
+  input { padding: 4px; }
+  button { margin-left: 4px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { border-bottom: 1px solid #eee; padding: 8px; }
+}

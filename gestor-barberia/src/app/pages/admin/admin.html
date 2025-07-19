@@ -1,5 +1,19 @@
 <div class="admin-panel">
   <h2>Panel de Administrador</h2>
+
+  <!-- Filtro de roles -->
+  <div style="margin-bottom:1rem;">
+    <label>
+      Filtrar por rol:
+      <select [(ngModel)]="filterRole" (change)="onFilterRoleChange()">
+        <option value="">Todos</option>
+        <option value="cliente">Cliente</option>
+        <option value="barbero">Barbero</option>
+        <option value="admin">Admin</option>
+      </select>
+    </label>
+  </div>
+
   <table>
     <thead>
       <tr>
@@ -11,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users$ | async">
+      <tr *ngFor="let user of filteredUsers">
         <td>{{ user.id }}</td>
         <td>
           <span *ngIf="!editMode || currentUser.id !== user.id">{{ user.name }}</span>
@@ -22,11 +36,9 @@
           <input *ngIf="editMode && currentUser.id === user.id" [(ngModel)]="currentUser.email" />
         </td>
         <td>
-          <!-- Selector de rol, editable solo si NO está editando este usuario -->
           <select [value]="user.role"
-          (change)="onRoleChange(user.id, $event)"
-          [disabled]="editMode && currentUser.id === user.id"
-          >
+            (change)="onRoleChange(user.id, $event)"
+            [disabled]="editMode && currentUser.id === user.id">
             <option value="cliente">Cliente</option>
             <option value="barbero">Barbero</option>
             <option value="admin">Admin</option>

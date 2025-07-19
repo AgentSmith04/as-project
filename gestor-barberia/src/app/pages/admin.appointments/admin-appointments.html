@@ -1,0 +1,48 @@
+<div class="admin-panel">
+  <h2>Turnos (Vista Global)</h2>
+
+  <div class="filtros">
+    <label>
+      Barbero:
+      <select [(ngModel)]="filterBarber" (change)="filtrar()">
+        <option value="">Todos</option>
+        <option *ngFor="let b of barbers" [value]="b.id">{{ b.name }}</option>
+      </select>
+    </label>
+    <label>
+      Cliente:
+      <select [(ngModel)]="filterClient" (change)="filtrar()">
+        <option value="">Todos</option>
+        <option *ngFor="let c of clients" [value]="c.id">{{ c.name }}</option>
+      </select>
+    </label>
+    <label>
+      Día:
+      <input type="date" [(ngModel)]="filterDate" (change)="filtrar()" />
+    </label>
+    <button class="btn gray" (click)="limpiarFiltros()">Limpiar Filtros</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Servicio</th>
+        <th>Cliente</th>
+        <th>Barbero</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let app of filteredAppointments">
+        <td>{{ app.serviceName }}</td>
+        <td>{{ app.userName || app.userId }}</td>
+        <td>{{ app.barberName || 'Sin asignar' }}</td>
+        <td>{{ app.date }}</td>
+        <td>{{ app.time }}</td>
+        <td>{{ app.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,55 @@
+<div class="admin-panel">
+  <h2>Mi Agenda</h2>
+
+  <!-- Turnos pendientes para tomar -->
+  <h3>Citas Pendientes</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Servicio</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of pendingAppointments$ | async">
+        <td>{{ appointment.userName }}</td>
+        <td>{{ appointment.serviceName }}</td>
+        <td>{{ appointment.date }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>
+          <button class="btn blue" (click)="acceptAppointment(appointment)">Aceptar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Turnos que ya tomó este barbero -->
+  <h3>Mis Turnos</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Servicio</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of myAppointments$ | async">
+        <td>{{ appointment.userName }}</td>
+        <td>{{ appointment.serviceName }}</td>
+        <td>{{ appointment.date }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>{{ appointment.status }}</td>
+        <td>
+          <button *ngIf="appointment.status === 'confirmed'" class="btn red" (click)="changeStatus(appointment, 'cancelled')">Cancelar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
