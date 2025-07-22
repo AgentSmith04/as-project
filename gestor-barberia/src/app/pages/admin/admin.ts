@@ -25,7 +25,6 @@ export class AdminComponent implements OnInit {
     const usersCollection = collection(this.firestore, 'users');
     this.users$ = collectionData(usersCollection, { idField: 'id' });
 
-    // Suscríbete para tener la lista local y poder filtrar
     this.users$.subscribe(users => {
       this.allUsers = users;
       this.applyRoleFilter();

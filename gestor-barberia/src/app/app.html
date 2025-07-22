@@ -4,7 +4,7 @@
   <a *ngIf="!userRole" routerLink="/register" class="nav-item">Registrarse</a>
   <a *ngIf="userRole === 'admin'" routerLink="/admin" class="nav-item">Admin</a>
   <a *ngIf="userRole === 'admin'" routerLink="/admin-services" class="nav-item">Servicios</a>
-  <a *ngIf="userRole === 'admin'" routerLink="/admin-appointments" class="nav-item">Ver Turnos</a> <!-- <--- NUEVO ENLACE -->
+  <a *ngIf="userRole === 'admin'" routerLink="/admin-appointments" class="nav-item">Ver Turnos</a>
   <a *ngIf="userRole === 'barbero'" routerLink="/barbero" class="nav-item">Barbero</a>
   <a routerLink="/cambiar-password" class="nav-item" *ngIf="userUid">Cambiar contraseña</a>
   <a *ngIf="userRole === 'cliente'" routerLink="/agendar" class="nav-item">Agendar Turno</a>
