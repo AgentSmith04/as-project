@@ -1,62 +1,152 @@
+:root {
+  --negro: #0A0908;
+  --azul-gris: #22333B;
+  --beige-claro: #EAE0D5;
+  --beige-oscuro: #C6AC8F;
+  --marron: #5E503F;
+  --error: #b0273c;
+  --success: #3c8d4a;
+  --gris: #adadad;
+  --pendiente: #f6b042;
+}
+
 .admin-panel {
-  max-width: 1000px;
-  margin: 60px auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 1100px;
+  margin: 50px auto 60px auto;
+  background: var(--beige-claro);
+  padding: 2.5rem 2.1rem;
+  border-radius: 22px;
+  box-shadow: 0 7px 40px 0 rgba(34,51,59,0.15), 0 2px 12px 0 rgba(94,80,63,0.10);
 
   h2 {
-    margin-bottom: 1.5rem;
     text-align: center;
+    color: var(--azul-gris);
+    font-weight: 800;
+    margin-bottom: 2.1rem;
+    font-size: 2em;
+    letter-spacing: 0.3px;
   }
 
   .filtros {
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1.2em 2em;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 2.2em;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5em 1.2em 1em 1.2em;
+    box-shadow: 0 1px 8px 0 rgba(34,51,59,0.09);
 
     label {
-      font-weight: bold;
-      select, input[type="date"] {
-        margin-left: 0.5rem;
-        padding: 0.3rem;
-        border-radius: 6px;
-        border: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+      color: var(--azul-gris);
+      font-size: 1em;
+      gap: 0.5em;
+    }
+
+    select,
+    input[type="date"] {
+      margin-top: 0.2em;
+      padding: 0.53em 1em;
+      border-radius: 8px;
+      border: 1.5px solid #e3d1b6;
+      background: var(--beige-oscuro);
+      font-size: 1em;
+      color: #222;
+      transition: border-color 0.17s, box-shadow 0.16s;
+      &:focus {
+        outline: none;
+        border-color: var(--azul-gris);
+        box-shadow: 0 2px 8px rgba(34,51,59,0.08);
+        background: #e7ddcc;
       }
     }
-    button {
-      margin-left: 1rem;
-      padding: 0.4rem 0.8rem;
+
+    .btn.beige {
+      font-weight: 700;
+      padding: 0.6em 1.4em;
+      border-radius: 8px;
       border: none;
-      border-radius: 6px;
-      font-size: 0.9rem;
+      font-size: 1em;
+      margin-left: 1em;
       cursor: pointer;
-      background-color: #6c757d;
-      color: white;
+      background: var(--beige-oscuro); // Color beige para botón
+      color: #222;
+      box-shadow: 0 1px 4px 0 rgba(34,51,59,0.11);
+      transition: background 0.16s, color 0.13s, transform 0.14s;
       &:hover {
-        opacity: 0.9;
+        background: var(--azul-gris); // Hover azul gris
+        color: #ff0000;
+        transform: scale(1.08);
       }
     }
   }
 
   table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 7px;
+    background: transparent;
+    font-size: 1.05em;
 
     th, td {
-      padding: 0.75rem;
-      border-bottom: 1px solid #ccc;
-      text-align: left;
+      padding: 0.89rem 0.6rem;
+      background: #fff;
+      border: none;
+      font-size: 1.07em;
+      text-align: center;
+      vertical-align: middle;
     }
 
     th {
-      background-color: #f4f4f4;
+      background: var(--beige-oscuro);
+      color: var(--azul-gris);
+      font-weight: 700;
+      font-size: 1.08em;
+      text-align: center;
     }
 
-    tr:hover {
-      background-color: #f9f9f9;
+    tr {
+      box-shadow: 0 1px 5px 0 rgba(34,51,59,0.09);
+      transition: box-shadow 0.2s, transform 0.16s;
+      &:hover {
+        box-shadow: 0 6px 20px 0 rgba(34,51,59,0.12);
+        transform: scale(1.012);
+        background: #ede7da;
+      }
     }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35em 1.15em;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1em;
+      letter-spacing: 0.5px;
+      min-width: 98px;
+      text-align: center;
+      &.badge-pendiente {
+        background: var(--pendiente); color: #000000; border: none;
+      }
+      &.badge-confirmado {
+        background: var(--success); color: #000000; border: none;
+      }
+      &.badge-cancelado {
+        background: var(--error); color: #000000; border: none;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 900px) {
+  .admin-panel {
+    padding: 1.2rem 0.4rem;
+    .filtros { padding: 1em 0.3em; flex-direction: column; gap: 1em 0; }
+    table { font-size: 0.98em; }
   }
 }

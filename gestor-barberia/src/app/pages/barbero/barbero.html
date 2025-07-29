@@ -45,7 +45,24 @@
         <td>{{ appointment.serviceName }}</td>
         <td>{{ appointment.date }}</td>
         <td>{{ appointment.time }}</td>
-        <td>{{ appointment.status }}</td>
+        <td>
+          <span
+            class="badge"
+            [ngClass]="{
+              'badge-pendiente': appointment.status === 'pending',
+              'badge-confirmado': appointment.status === 'confirmed',
+              'badge-cancelado': appointment.status === 'cancelled'
+            }"
+          >
+            {{
+              appointment.status === 'pending'
+                ? 'Pendiente'
+                : appointment.status === 'confirmed'
+                ? 'Confirmada'
+                : 'Cancelada'
+            }}
+          </span>
+        </td>
         <td>
           <button *ngIf="appointment.status === 'confirmed'" class="btn red" (click)="changeStatus(appointment, 'cancelled')">Cancelar</button>
         </td>

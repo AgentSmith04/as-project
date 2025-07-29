@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Auth, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-cambiar-password',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule], // Agrega RouterModule aquí
   templateUrl: './cambiar-password.html',
+  // Usa el mismo SCSS que login/register
+  styleUrls: ['./cambiar-password.scss']
 })
 export class CambiarPasswordComponent {
   actualPassword = '';
@@ -39,6 +42,8 @@ export class CambiarPasswordComponent {
     } catch (err: any) {
       if (err.code === 'auth/wrong-password') {
         this.error = 'La contraseña actual es incorrecta.';
+      } else if (err.code === 'auth/weak-password') {
+        this.error = 'La nueva contraseña es demasiado débil.';
       } else {
         this.error = err.message || 'Error al actualizar la contraseña.';
       }

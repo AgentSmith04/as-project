@@ -1,51 +1,182 @@
+:root {
+  --negro: #0A0908;
+  --azul-gris: #22333B;
+  --beige-claro: #EAE0D5;
+  --beige-oscuro: #C6AC8F;
+  --marron: #5E503F;
+}
+
 .agendar-panel {
-  max-width: 520px;
-  margin: 48px auto 0 auto;
-  background: #fff;
-  padding: 2.5rem 2.5rem 2rem 2.5rem;
-  border-radius: 24px;
-  box-shadow: 0 6px 40px 0 rgba(36, 41, 46, 0.13);
-  text-align: center;
-}
+  max-width: 540px;
+  margin: 48px auto;
+  background: var(--beige-claro);
+  padding: 2.5rem 2.2rem 2rem 2.2rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 32px 0 rgba(34,51,59,0.15), 0 1.5px 8px 0 rgba(90,80,60,0.06);
 
-.agendar-panel h2 {
-  font-size: 2rem;
-  margin-bottom: 1.2rem;
-}
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--azul-gris);
+    font-size: 2.2em;
+  }
 
-.agendar-panel h3 {
-  margin-top: 1rem;
-  margin-bottom: 1.1rem;
-}
+  h3 {
+    margin: 1.2rem 0 1rem 0;
+    font-weight: 600;
+    color: var(--marron);
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
 
-.agendar-panel ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem 0;
-}
+  .msg {
+    border-radius: 12px;
+    padding: 1rem 1.3rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.09em;
+    .icon { margin-right: 10px; font-size: 1.18em; }
+  }
+  .msg-success { background: #e8ffe8; color: #27754a; border: 1.7px solid #b3ffd2;}
+  .msg-error   { background: #ffeaea; color: #b0273c; border: 1.7px solid #ffb3bc;}
 
-.agendar-panel li {
-  margin-bottom: 0.8rem;
-}
+  .servicios-list {
+    .servicios-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
 
-.agendar-panel label {
-  display: inline-block;
-  margin: 0 12px 1.2rem 12px;
-  font-size: 1.05rem;
-}
+      .card {
+        min-width: 170px;
+        max-width: 230px;
+        background: linear-gradient(135deg, var(--beige-oscuro) 60%, var(--beige-claro) 100%);
+        border-radius: 16px;
+        box-shadow: 0 5px 26px 0 rgba(34,51,59,0.13);
+        padding: 1.2rem 1.1rem 1rem 1.1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: box-shadow 0.23s, transform 0.21s;
+        cursor: pointer;
+        border: 1.5px solid var(--beige-claro);
+        &:hover {
+          box-shadow: 0 10px 32px 0 rgba(34,51,59,0.22);
+          transform: scale(1.055);
+          z-index: 3;
+        }
 
-.agendar-panel button {
-  margin: 8px 7px 0 7px;
-  padding: 5px 18px;
-  border-radius: 8px;
-  border: 1px solid #2979ff;
-  background: #fff;
-  color: #2979ff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s background, 0.2s color;
-}
-.agendar-panel button:hover {
-  background: #2979ff;
-  color: #fff;
+        .card-header {
+          font-size: 1.11em;
+          color: var(--azul-gris);
+          font-weight: 700;
+          margin-bottom: 0.35em;
+          letter-spacing: 0.4px;
+        }
+        .card-body {
+          margin-bottom: 0.7em;
+        }
+        .badge {
+          display: inline-block;
+          font-size: 0.98em;
+          border-radius: 7px;
+          padding: 0.16em 0.8em;
+          margin: 0 0.18em;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          &.duration { background: #d8d3c1; color: var(--azul-gris); }
+          &.price    { background: #e2d4bc; color: var(--marron); }
+        }
+        .card-footer {
+          margin-top: 0.75em;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          button {
+            background: var(--azul-gris);
+            color: var(--beige-claro);
+            border: none;
+            border-radius: 8px;
+            padding: 0.49em 1.28em;
+            font-size: 1.01em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 1px 6px 0 rgba(34,51,59,0.07);
+            transition: background 0.18s, transform 0.19s;
+            letter-spacing: 0.6px;
+            &:hover {
+              background: var(--marron);
+              transform: scale(1.09);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .reserva-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 500;
+      color: var(--azul-gris);
+      margin-bottom: 0.5em;
+      input[type="date"],
+      select {
+        margin-top: 0.49em;
+        border-radius: 8px;
+        border: 1.5px solid var(--beige-oscuro);
+        background: #fcfaf7;
+        padding: 0.55em 0.92em;
+        font-size: 1em;
+        outline: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+        &:focus {
+          border-color: var(--marron);
+          box-shadow: 0 0 6px #5e503f30;
+        }
+      }
+    }
+    .selected {
+      color: var(--marron);
+      font-weight: 700;
+      font-size: 1.18em;
+    }
+    .form-actions {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: flex-end;
+      button {
+        background: var(--azul-gris);
+        color: var(--beige-claro);
+        border: none;
+        border-radius: 8px;
+        padding: 0.49em 1.3em;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 2px 10px 0 rgba(34,51,59,0.08);
+        font-size: 1em;
+        letter-spacing: 0.6px;
+        transition: background 0.18s, transform 0.19s;
+        &:hover {
+          background: var(--marron);
+          transform: scale(1.09);
+        }
+        &.secondary {
+          background: var(--beige-oscuro);
+          color: var(--azul-gris);
+          border: 1.5px solid #b6a180;
+          &:hover { background: var(--beige-claro); }
+        }
+      }
+    }
+  }
 }

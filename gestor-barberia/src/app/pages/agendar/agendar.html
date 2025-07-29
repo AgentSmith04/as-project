@@ -1,35 +1,51 @@
 <div class="agendar-panel">
-  <h2>Reservar un turno</h2>
+  <h2>Reservar un Turno</h2>
 
-  <!-- Mensaje de éxito (SIEMPRE visible cuando existe) -->
-  <div *ngIf="successMsg" class="msg-success">{{successMsg}}</div>
-  <!-- Mensaje de error (SIEMPRE visible cuando existe) -->
-  <div *ngIf="errorMsg" class="msg-error">{{errorMsg}}</div>
+  <div *ngIf="successMsg" class="msg msg-success">
+    <span class="icon">&#10003;</span> <!-- check -->
+    {{successMsg}}
+  </div>
+  <div *ngIf="errorMsg" class="msg msg-error">
+    <span class="icon">&#9888;</span> <!-- warning -->
+    {{errorMsg}}
+  </div>
 
   <!-- Lista de servicios -->
-  <div *ngIf="!selectedService">
-    <h3>Servicios disponibles</h3>
-    <ul>
-      <li *ngFor="let service of services$ | async">
-        <b>{{service.name}}</b> | {{service.duration}} min | ${{service.price}}
-        <button (click)="selectService(service)">Seleccionar</button>
-      </li>
-    </ul>
+  <div class="servicios-list" *ngIf="!selectedService">
+    <h3>Servicios Disponibles</h3>
+    <div class="servicios-cards">
+      <div class="card" *ngFor="let service of services$ | async">
+        <div class="card-header">
+          <b>{{service.name}}</b>
+        </div>
+        <div class="card-body">
+          <span class="badge duration">{{service.duration}} min</span>
+          <span class="badge price">${{service.price}}</span>
+        </div>
+        <div class="card-footer">
+          <button (click)="selectService(service)">Seleccionar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Formulario para reservar -->
-  <div *ngIf="selectedService">
-    <h3>Servicio: {{selectedService.name}}</h3>
-    <label>Fecha:
-      <input type="date" [(ngModel)]="selectedDate">
+  <form class="reserva-form" *ngIf="selectedService" (submit)="agendarTurno(); $event.preventDefault()">
+    <h3>Servicio: <span class="selected">{{selectedService.name}}</span></h3>
+    <label>
+      Fecha:
+      <input type="date" [(ngModel)]="selectedDate" name="fecha" required>
     </label>
-    <label>Hora:
-      <select [(ngModel)]="selectedTime">
+    <label>
+      Hora:
+      <select [(ngModel)]="selectedTime" name="hora" required>
         <option value="" disabled selected>Selecciona una hora</option>
         <option *ngFor="let hora of horarios" [value]="hora">{{hora}}</option>
       </select>
     </label>
-    <button (click)="agendarTurno()">Reservar</button>
-    <button (click)="cancelar()" type="button">Cancelar</button>
-  </div>
+    <div class="form-actions">
+      <button type="submit">Reservar</button>
+      <button type="button" class="secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
 </div>

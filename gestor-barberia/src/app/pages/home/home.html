@@ -1,5 +1,18 @@
 <div class="home-container">
-  <h1>Bienvenido al Gestor de Turnos para Barbería</h1>
-  <p>Organiza tus citas de forma rápida y eficiente.</p>
-  <button pButton label="Iniciar Sesión" routerLink="/login"></button>
+  <div class="home-card">
+    <h1>
+      ¡Bienvenido a <span class="home-accent">GestorBarbería</span>!
+    </h1>
+    <p class="home-subtitle">
+      Organiza tus citas de barbería de forma <b>rápida</b> y <b>profesional</b>.
+    </p>
+    <div class="home-actions">
+      <a *ngIf="userRole === 'cliente'" routerLink="/agendar" class="home-btn">
+        Reservar turno
+      </a>
+      <a *ngIf="!userRole" routerLink="/login" class="home-btn">
+        Iniciar sesión
+      </a>
+    </div>
+  </div>
 </div>

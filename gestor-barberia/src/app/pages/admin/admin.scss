@@ -1,58 +1,143 @@
+:root {
+  --negro: #0A0908;
+  --azul-gris: #22333B;
+  --beige-claro: #EAE0D5;
+  --beige-oscuro: #C6AC8F;
+  --marron: #5E503F;
+}
+
 .admin-panel {
-  max-width: 900px;
-  margin: 60px auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 1100px;
+  margin: 50px auto 60px auto;
+  background: var(--beige-claro);
+  padding: 2.5rem 2.1rem;
+  border-radius: 22px;
+  box-shadow: 0 7px 40px 0 rgba(34,51,59,0.15), 0 2px 12px 0 rgba(94,80,63,0.10);
 
   h2 {
-    margin-bottom: 1.5rem;
     text-align: center;
+    font-size: 2em;
+    color: var(--azul-gris);
+    letter-spacing: 0.5px;
+    margin-bottom: 2rem;
+    font-weight: 700;
   }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-
-    th, td {
-      padding: 0.75rem;
-      border-bottom: 1px solid #ccc;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-    }
-
-    tr:hover {
-      background-color: #f9f9f9;
+  .admin-filtros {
+    text-align: right;
+    margin-bottom: 1.4rem;
+    label {
+      color: var(--marron);
+      font-weight: 600;
+      font-size: 1.05em;
+      select {
+        margin-left: 0.8em;
+        border-radius: 8px;
+        border: 1.5px solid var(--beige-oscuro);
+        background: #fcfaf7;
+        padding: 0.41em 0.95em;
+        font-size: 1em;
+        color: var(--azul-gris);
+        outline: none;
+        transition: border-color 0.16s, box-shadow 0.16s;
+        &:focus {
+          border-color: var(--marron);
+          box-shadow: 0 0 6px #5e503f30;
+        }
+      }
     }
   }
+  .admin-table-wrapper {
+    overflow-x: auto;
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+      background: transparent;
+      th, td {
+        padding: 0.9rem 0.6rem;
+        background: #fff;
+        border: none;
+        font-size: 1.07em;
+        text-align: left;
+        vertical-align: middle;
+      }
+      th {
+        background: var(--beige-oscuro);
+        color: var(--azul-gris);
+        font-weight: 700;
+        font-size: 1.07em;
+      }
+      tr {
+        border-radius: 15px;
+        box-shadow: 0 1px 5px 0 rgba(34,51,59,0.07);
+        transition: box-shadow 0.2s, transform 0.16s;
+        &:hover {
+          box-shadow: 0 6px 20px 0 rgba(34,51,59,0.17);
+          transform: scale(1.013);
+          background: #ede7da;
+        }
+      }
+      input[type="text"], input[type="email"] {
+        border-radius: 8px;
+        border: 1.5px solid var(--beige-oscuro);
+        padding: 0.42em 0.7em;
+        font-size: 1em;
+        outline: none;
+        background: #fcfaf7;
+        margin-left: 2px;
+        &:focus {
+          border-color: var(--marron);
+          box-shadow: 0 0 6px #5e503f33;
+        }
+      }
+      select {
+        border-radius: 7px;
+        border: 1.5px solid var(--beige-oscuro);
+        background: #f5efe7;
+        padding: 0.29em 0.5em;
+        font-size: 1em;
+        color: var(--azul-gris);
+        outline: none;
+        transition: border-color 0.16s;
+        &:focus {
+          border-color: var(--marron);
+        }
+      }
+      .btn {
+        margin-right: 0.4rem;
+        padding: 0.37rem 1rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.96rem;
+        cursor: pointer;
+        font-weight: 700;
+        transition: background 0.19s, transform 0.19s;
+        box-shadow: 0 1px 5px 0 rgba(34,51,59,0.08);
 
-  .btn {
-    margin-right: 0.5rem;
-    padding: 0.4rem 0.8rem;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    color: white;
+        &:hover { transform: scale(1.09); }
 
-    &.blue {
-      background-color: #007bff;
-    }
-
-    &.red {
-      background-color: #dc3545;
-    }
-
-    &.gray {
-      background-color: #6c757d;
-    }
-
-    &:hover {
-      opacity: 0.9;
+        &.blue {
+          background-color: var(--azul-gris);
+          color: #222;
+          &:hover { background: #182127; color: #fff; }
+        }
+        &.red {
+          background-color: #b0273c;
+          color: #fff;
+        }
+        &.green {
+          background-color: var(--beige-oscuro);
+          color: #222 !important; // Letras negras para Guardar
+          &:hover {
+            background-color: #b79a74;
+            color: #222 !important;
+          }
+        }
+        &.gray {
+          background-color: #b2a393;
+          color: #222 !important; // Letras negras para Cancelar
+        }
+      }
     }
   }
 }

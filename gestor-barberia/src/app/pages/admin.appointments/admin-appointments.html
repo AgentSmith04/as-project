@@ -20,7 +20,7 @@
       Día:
       <input type="date" [(ngModel)]="filterDate" (change)="filtrar()" />
     </label>
-    <button class="btn gray" (click)="limpiarFiltros()">Limpiar Filtros</button>
+    <button class="btn beige" (click)="limpiarFiltros()">Limpiar Filtros</button>
   </div>
 
   <table>
@@ -41,7 +41,26 @@
         <td>{{ app.barberName || 'Sin asignar' }}</td>
         <td>{{ app.date }}</td>
         <td>{{ app.time }}</td>
-        <td>{{ app.status }}</td>
+        <td>
+          <span
+            class="badge"
+            [ngClass]="{
+              'badge-pendiente': app.status === 'pending',
+              'badge-confirmado': app.status === 'confirmed',
+              'badge-cancelado': app.status === 'cancelled'
+            }"
+          >
+            {{
+              app.status === 'pending'
+                ? 'Pendiente'
+                : app.status === 'confirmed'
+                ? 'Confirmada'
+                : app.status === 'cancelled'
+                ? 'Cancelada'
+                : app.status
+            }}
+          </span>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -1,15 +1,23 @@
-<nav>
-  <a routerLink="/" class="nav-item">Inicio</a>
-  <a *ngIf="!userRole" routerLink="/login" class="nav-item">Login</a>
-  <a *ngIf="!userRole" routerLink="/register" class="nav-item">Registrarse</a>
-  <a *ngIf="userRole === 'admin'" routerLink="/admin" class="nav-item">Admin</a>
-  <a *ngIf="userRole === 'admin'" routerLink="/admin-services" class="nav-item">Servicios</a>
-  <a *ngIf="userRole === 'admin'" routerLink="/admin-appointments" class="nav-item">Ver Turnos</a>
-  <a *ngIf="userRole === 'barbero'" routerLink="/barbero" class="nav-item">Barbero</a>
-  <a routerLink="/cambiar-password" class="nav-item" *ngIf="userUid">Cambiar contraseña</a>
-  <a *ngIf="userRole === 'cliente'" routerLink="/agendar" class="nav-item">Agendar Turno</a>
-  <a *ngIf="userRole === 'cliente'" routerLink="/mis-turnos" class="nav-item">Mis Turnos</a>
-  <a (click)="logout()" class="nav-item" *ngIf="userUid" style="cursor:pointer;">Cerrar sesión</a>
+<nav class="main-navbar">
+  <div class="nav-content">
+    <span class="logo">
+      <!--<img src="assets/logo-barberia.png" alt="Logo" height="30" />-->
+      Gestor<span class="logo-accent">Barbería</span>
+    </span>
+    <div class="nav-links">
+      <a routerLink="/" class="nav-item">Inicio</a>
+      <a *ngIf="!userRole" routerLink="/login" class="nav-item">Login</a>
+      <a *ngIf="!userRole" routerLink="/register" class="nav-item">Registrarse</a>
+      <a *ngIf="userRole === 'admin'" routerLink="/admin" class="nav-item">Admin</a>
+      <a *ngIf="userRole === 'admin'" routerLink="/admin-services" class="nav-item">Servicios</a>
+      <a *ngIf="userRole === 'admin'" routerLink="/admin-appointments" class="nav-item">Ver Turnos</a>
+      <a *ngIf="userRole === 'barbero'" routerLink="/barbero" class="nav-item">Barbero</a>
+      <a routerLink="/cambiar-password" class="nav-item" *ngIf="userUid">Cambiar contraseña</a>
+      <a *ngIf="userRole === 'cliente'" routerLink="/agendar" class="nav-item">Agendar Turno</a>
+      <a *ngIf="userRole === 'cliente'" routerLink="/mis-turnos" class="nav-item">Mis Turnos</a>
+      <a (click)="logout()" class="nav-item logout" *ngIf="userUid" style="cursor:pointer;">Cerrar sesión</a>
+    </div>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>

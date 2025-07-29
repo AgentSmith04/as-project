@@ -2,7 +2,7 @@
   <h2>Panel de Administrador</h2>
 
   <!-- Filtro de roles -->
-  <div style="margin-bottom:1rem;">
+  <div class="admin-filtros">
     <label>
       Filtrar por rol:
       <select [(ngModel)]="filterRole" (change)="onFilterRoleChange()">
@@ -14,47 +14,49 @@
     </label>
   </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Rol</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of filteredUsers">
-        <td>{{ user.id }}</td>
-        <td>
-          <span *ngIf="!editMode || currentUser.id !== user.id">{{ user.name }}</span>
-          <input *ngIf="editMode && currentUser.id === user.id" [(ngModel)]="currentUser.name" />
-        </td>
-        <td>
-          <span *ngIf="!editMode || currentUser.id !== user.id">{{ user.email }}</span>
-          <input *ngIf="editMode && currentUser.id === user.id" [(ngModel)]="currentUser.email" />
-        </td>
-        <td>
-          <select [value]="user.role"
-            (change)="onRoleChange(user.id, $event)"
-            [disabled]="editMode && currentUser.id === user.id">
-            <option value="cliente">Cliente</option>
-            <option value="barbero">Barbero</option>
-            <option value="admin">Admin</option>
-          </select>
-        </td>
-        <td>
-          <ng-container *ngIf="!editMode || currentUser.id !== user.id">
-            <button (click)="editUser(user)">Editar</button>
-            <button (click)="deleteUser(user.id)">Eliminar</button>
-          </ng-container>
-          <ng-container *ngIf="editMode && currentUser.id === user.id">
-            <button (click)="saveUser()">Guardar</button>
-            <button (click)="cancelEdit()">Cancelar</button>
-          </ng-container>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="admin-table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{ user.id }}</td>
+          <td>
+            <span *ngIf="!editMode || currentUser.id !== user.id">{{ user.name }}</span>
+            <input *ngIf="editMode && currentUser.id === user.id" [(ngModel)]="currentUser.name" />
+          </td>
+          <td>
+            <span *ngIf="!editMode || currentUser.id !== user.id">{{ user.email }}</span>
+            <input *ngIf="editMode && currentUser.id === user.id" [(ngModel)]="currentUser.email" />
+          </td>
+          <td>
+            <select [value]="user.role"
+              (change)="onRoleChange(user.id, $event)"
+              [disabled]="editMode && currentUser.id === user.id">
+              <option value="cliente">Cliente</option>
+              <option value="barbero">Barbero</option>
+              <option value="admin">Admin</option>
+            </select>
+          </td>
+          <td>
+            <ng-container *ngIf="!editMode || currentUser.id !== user.id">
+              <button class="btn blue" (click)="editUser(user)">Editar</button>
+              <button class="btn red" (click)="deleteUser(user.id)">Eliminar</button>
+            </ng-container>
+            <ng-container *ngIf="editMode && currentUser.id === user.id">
+              <button class="btn green" (click)="saveUser()">Guardar</button>
+              <button class="btn gray" (click)="cancelEdit()">Cancelar</button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // <-- Importa RouterModule aquí también
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule], // <-- AGREGA RouterModule aquí
   templateUrl: './register.html',
   styleUrls: ['./register.scss']
 })
@@ -40,5 +40,8 @@ export class RegisterComponent {
       this.errorMsg = err.message || 'Error al registrar usuario';
     }
   }
-}
 
+  irALogin() {
+    this.router.navigate(['/login']);
+  }
+}

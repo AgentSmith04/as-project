@@ -1,34 +1,51 @@
-<div class="services-panel">
-  <h2>Servicios de la Barbería</h2>
-  <form (submit)="saveService(); $event.preventDefault()">
-    <input type="text" placeholder="Nombre" [(ngModel)]="form.name" name="name" required>
-    <input type="number" placeholder="Duración (min)" [(ngModel)]="form.duration" name="duration" min="1" required>
-    <input type="number" placeholder="Precio" [(ngModel)]="form.price" name="price" min="0" required>
-    <button type="submit">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
-    <button type="button" *ngIf="editMode" (click)="resetForm()">Cancelar</button>
-  </form>
-  <hr>
-  <table>
-    <tr>
-      <th>Nombre</th>
-      <th>Duración</th>
-      <th>Precio</th>
-      <th>Activo</th>
-      <th>Acciones</th>
-    </tr>
-    <tr *ngFor="let service of services$ | async">
-      <td>{{ service.name }}</td>
-      <td>{{ service.duration }} min</td>
-      <td>${{ service.price }}</td>
-      <td>
-        <button (click)="toggleActive(service)">
-          {{ service.active ? 'Activo' : 'Inactivo' }}
-        </button>
-      </td>
-      <td>
-        <button (click)="editService(service)">Editar</button>
-        <button (click)="deleteService(service.id)">Eliminar</button>
-      </td>
-    </tr>
-  </table>
+<div class="services-bg">
+  <div class="services-panel">
+    <h2>Servicios de la Barbería</h2>
+    <form class="services-form" (submit)="saveService(); $event.preventDefault()">
+      <div class="form-row">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" placeholder="Nombre" [(ngModel)]="form.name" name="name" required>
+      </div>
+      <div class="form-row">
+        <label for="duration">Duración (min)</label>
+        <input type="number" id="duration" placeholder="Duración (min)" [(ngModel)]="form.duration" name="duration" min="1" required>
+      </div>
+      <div class="form-row">
+        <label for="price">Precio</label>
+        <input type="number" id="price" placeholder="Precio" [(ngModel)]="form.price" name="price" min="0" required>
+      </div>
+      <div class="form-actions">
+        <button class="btn beige" type="submit">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
+        <button class="btn red" type="button" *ngIf="editMode" (click)="resetForm()">Cancelar</button>
+      </div>
+    </form>
+    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Duración</th>
+          <th>Precio</th>
+          <th>Activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of services$ | async">
+          <td>{{ service.name }}</td>
+          <td>{{ service.duration }} min</td>
+          <td>${{ service.price }}</td>
+          <td>
+            <button class="btn small" [ngClass]="service.active ? 'green' : 'gray'" (click)="toggleActive(service)">
+              {{ service.active ? 'Activo' : 'Inactivo' }}
+            </button>
+          </td>
+          <td>
+            <button class="btn beige small" (click)="editService(service)">Editar</button>
+            <button class="btn red small" (click)="deleteService(service.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
