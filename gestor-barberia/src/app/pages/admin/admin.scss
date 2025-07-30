@@ -22,6 +22,7 @@
     margin-bottom: 2rem;
     font-weight: 700;
   }
+
   .admin-filtros {
     text-align: right;
     margin-bottom: 1.4rem;
@@ -46,6 +47,34 @@
       }
     }
   }
+
+  .admin-actions {
+    display: flex;
+    gap: 1em;
+    justify-content: flex-end;
+    margin-bottom: 1.4em;
+    .btn {
+      font-weight: 700;
+      padding: 0.6em 1.4em;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+      background: var(--beige-oscuro);
+      color: #222;
+      transition: background 0.16s, color 0.13s, transform 0.14s;
+      &.green {
+        background: #3c8d4a;
+        color: #fff;
+      }
+      &:hover {
+        background: var(--azul-gris);
+        color: #000000;
+        transform: scale(1.06);
+      }
+    }
+  }
+
   .admin-table-wrapper {
     overflow-x: auto;
     table {

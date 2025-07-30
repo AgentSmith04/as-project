@@ -4,6 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Firestore, collection, collectionData, updateDoc, doc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
+// IMPORTS PARA EXPORTAR
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -87,5 +92,36 @@ export class AdminComponent implements OnInit {
   async cambiarRol(userId: string, nuevoRol: string) {
     const userDoc = doc(this.firestore, 'users', userId);
     await updateDoc(userDoc, { role: nuevoRol });
+  }
+
+  // EXPORTAR PDF
+  exportarPDF() {
+    const doc = new jsPDF();
+    const columns = ['ID', 'Nombre', 'Correo', 'Rol'];
+    const rows = this.filteredUsers.map(u => [u.id, u.name, u.email, u.role]);
+    doc.text('Reporte de Usuarios', 14, 18);
+    autoTable(doc, {
+      startY: 24,
+      head: [columns],
+      body: rows,
+      styles: { fontSize: 11 },
+      headStyles: { fillColor: [198, 172, 143] }
+    });
+    doc.save('usuarios.pdf');
+  }
+
+  // EXPORTAR EXCEL
+  exportarExcel() {
+    const ws = XLSX.utils.json_to_sheet(
+      this.filteredUsers.map(u => ({
+        ID: u.id,
+        Nombre: u.name,
+        Correo: u.email,
+        Rol: u.role
+      }))
+    );
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Usuarios');
+    XLSX.writeFile(wb, 'usuarios.xlsx');
   }
 }

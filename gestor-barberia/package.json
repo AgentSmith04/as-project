@@ -32,8 +32,11 @@
     "@angular/router": "^20.1.1",
     "@angular/ssr": "^20.1.1",
     "firebase": "^11.10.0",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "primeicons": "^7.0.0",
     "primeng": "^20.0.0",
+    "xlsx": "^0.18.5",
     "zone.js": "^0.15.1"
   },
   "devDependencies": {

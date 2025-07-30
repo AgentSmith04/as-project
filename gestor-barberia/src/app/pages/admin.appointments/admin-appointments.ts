@@ -4,12 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+
 interface Usuario {
   id: string;
   name: string;
   email: string;
   role: 'admin' | 'barbero' | 'cliente';
-  // agrega otros campos si los necesitas
 }
 
 @Component({
@@ -72,5 +75,58 @@ export class AdminAppointmentsComponent implements OnInit {
     this.filterClient = '';
     this.filterDate = '';
     this.filteredAppointments = this.allAppointments;
+  }
+
+  // --- EXPORTAR PDF ---
+  exportarPDF() {
+    const doc = new jsPDF();
+    const columns = ['Servicio', 'Cliente', 'Barbero', 'Fecha', 'Hora', 'Estado'];
+    const rows = this.filteredAppointments.map(app => [
+      app.serviceName,
+      app.userName || app.userId,
+      app.barberName || 'Sin asignar',
+      app.date,
+      app.time,
+      app.status === 'pending'
+        ? 'Pendiente'
+        : app.status === 'confirmed'
+        ? 'Confirmada'
+        : app.status === 'cancelled'
+        ? 'Cancelada'
+        : app.status
+    ]);
+    doc.text('Reporte de Turnos', 14, 18);
+    autoTable(doc, {
+      startY: 24,
+      head: [columns],
+      body: rows,
+      styles: { fontSize: 11 },
+      headStyles: { fillColor: [198, 172, 143] }
+    });
+    doc.save('turnos.pdf');
+  }
+
+  // --- EXPORTAR EXCEL ---
+  exportarExcel() {
+    const ws = XLSX.utils.json_to_sheet(
+      this.filteredAppointments.map(app => ({
+        Servicio: app.serviceName,
+        Cliente: app.userName || app.userId,
+        Barbero: app.barberName || 'Sin asignar',
+        Fecha: app.date,
+        Hora: app.time,
+        Estado:
+          app.status === 'pending'
+            ? 'Pendiente'
+            : app.status === 'confirmed'
+            ? 'Confirmada'
+            : app.status === 'cancelled'
+            ? 'Cancelada'
+            : app.status
+      }))
+    );
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Turnos');
+    XLSX.writeFile(wb, 'turnos.xlsx');
   }
 }
